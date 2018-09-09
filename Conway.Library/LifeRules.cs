@@ -8,8 +8,8 @@ namespace Conway.Library
 {
     public enum CellState
     {
-        Alive,
         Dead,
+        Alive,
     }
 
     public class LifeRules
