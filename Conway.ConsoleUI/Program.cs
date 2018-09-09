@@ -11,10 +11,8 @@ namespace Conway.ConsoleUI
     {
         static void Main(string[] args)
         {
-            var grid = new LifeGrid();
-            grid.CurrentState[1, 2] = CellState.Alive;
-            grid.CurrentState[2, 2] = CellState.Alive;
-            grid.CurrentState[3, 2] = CellState.Alive;
+            var grid = new LifeGrid(25, 65);
+            grid.Randomize();
 
             ShowGrid(grid.CurrentState);
 
@@ -29,19 +27,21 @@ namespace Conway.ConsoleUI
         {
             Console.Clear();
             int x = 0;
-            int rowLength = 5;
+            int rowLength = currentState.GetUpperBound(1) + 1;
+
+            var output = new StringBuilder();
 
             foreach (var state in currentState)
             {
-                var output = state == CellState.Alive ? "O" : "·";
-                Console.Write(output);
+                output.Append(state == CellState.Alive ? "O" : "·");
                 x++;
                 if (x >= rowLength)
                 {
                     x = 0;
-                    Console.WriteLine();
+                    output.AppendLine();
                 }
             }
+            Console.Write(output.ToString());
         }
     }
 }
